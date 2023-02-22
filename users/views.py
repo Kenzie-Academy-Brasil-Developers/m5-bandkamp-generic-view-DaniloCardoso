@@ -43,11 +43,11 @@ class UserDetailView(APIView):
 
         self.check_object_permissions(request, user)
 
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = UserSerializer(user, request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response(serializer.data)
+        return Response(serializer.data, status.HTTP_200_OK)
 
     def delete(self, request: Request, pk: int) -> Response:
         """

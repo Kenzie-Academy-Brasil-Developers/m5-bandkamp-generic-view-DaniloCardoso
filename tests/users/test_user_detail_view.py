@@ -3,6 +3,7 @@ from rest_framework.views import status
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from tests.factories import create_user_with_token
+from rest_framework_simplejwt import views as jwt_views
 
 
 User: AbstractUser = get_user_model()
@@ -232,9 +233,10 @@ class UserDetailViewsTest(APITestCase):
         )
         self.assertDictEqual(expected_data, resulted_data, msg)
 
-        user = User.objects.last()
+        user = User.objects.first()
         msg = (
             f"Verifique se a senha está sendo atualizada no {response.request['REQUEST_METHOD']} em "
             + f"em `{self.BASE_URL}`"
         )
+
         self.assertTrue(user.check_password(info_to_patch["password"]), msg)
