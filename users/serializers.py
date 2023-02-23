@@ -18,10 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
-    # email = serializers.EmailField(
-    #     validators=[UniqueValidator(queryset=User.objects.all())],
-    # )
-
     class Meta:
         model = User
         fields = [
